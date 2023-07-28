@@ -13,10 +13,10 @@ const Board = () => {
         const nextSquares = squares.slice();
 
         if(isX){
-            nextSquares[i] = "X";
+            nextSquares[i] = "BAT";
         }
         else{
-            nextSquares[i] = "O";
+            nextSquares[i] = "SLIME";
         }
         setSquares(nextSquares);
         setIsX(!isX);
@@ -57,27 +57,36 @@ const Board = () => {
         status = 'IT IS A FAT TIE';
     }
     else {
-        status = 'Next player: ' + (isX ? 'X' : '0');
+        status = 'Next player: ' + (isX ? 'BAT' : 'SLIME');
     }
 
   return (
-    <div>
-      <div className='status'>{status}</div>
-      <div className="board-row">
-        <Squares position={squares[0]} onSquare={() => handleClick(0)}/>
-        <Squares position={squares[1]} onSquare={() => handleClick(1)}/>
-        <Squares position={squares[2]} onSquare={() => handleClick(2)}/>
-      </div>
-      <div className="board-row">
-        <Squares position={squares[3]} onSquare={() => handleClick(3)}/>
-        <Squares position={squares[4]} onSquare={() => handleClick(4)}/>
-        <Squares position={squares[5]} onSquare={() => handleClick(5)}/>
-      </div>
-      <div className="board-row">
-        <Squares position={squares[6]} onSquare={() => handleClick(6)}/>
-        <Squares position={squares[7]} onSquare={() => handleClick(7)}/>
-        <Squares position={squares[8]} onSquare={() => handleClick(8)}/>
-      </div>
+    <div className='container'>
+        <div className="row mt-5">
+            <div className="col">
+                <div className='status text-center'>{status}</div>
+            </div>
+        </div>
+
+        <div className="row mt-5">
+            <div className="col">
+                <div className="board-row">
+                    <Squares position={squares[0]} onSquare={() => handleClick(0)}/>
+                    <Squares position={squares[1]} onSquare={() => handleClick(1)}/>
+                    <Squares position={squares[2]} onSquare={() => handleClick(2)}/>
+                </div>
+                <div className="board-row">
+                    <Squares position={squares[3]} onSquare={() => handleClick(3)}/>
+                    <Squares position={squares[4]} onSquare={() => handleClick(4)}/>
+                    <Squares position={squares[5]} onSquare={() => handleClick(5)}/>
+                </div>
+                <div className="board-row">
+                    <Squares position={squares[6]} onSquare={() => handleClick(6)}/>
+                    <Squares position={squares[7]} onSquare={() => handleClick(7)}/>
+                    <Squares position={squares[8]} onSquare={() => handleClick(8)}/>
+                </div>
+            </div>
+        </div>
     </div>
   )
 }
