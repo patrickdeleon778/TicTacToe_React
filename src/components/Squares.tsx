@@ -7,13 +7,6 @@ interface Props {
 
 const Squares = ({position, onSquare}:Props) => {
 
-    // const [value, setValue] = useState('');
-
-
-//   const handleClick = () => {
-//     setValue('X');
-//   };
-
   return (
     <div>
       <button className="square" onClick={onSquare}>{position}</button>

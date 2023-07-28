@@ -43,11 +43,18 @@ const Board = () => {
         return null;
     }
 
+    const tie = () => { // added a tie function for when the board is filled up 
+      return squares.every(square => square !== null); // .every checks each square to see if it is not equal to null. meaning if the squares are already used.
+    }
+
     const winner = determineWinner(squares);
     let status = '';
 
     if(winner){
         status = 'Winner: ' + winner;
+    }
+    else if(tie()){
+        status = 'IT IS A FAT TIE';
     }
     else {
         status = 'Next player: ' + (isX ? 'X' : '0');
