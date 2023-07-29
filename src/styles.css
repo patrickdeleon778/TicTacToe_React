@@ -9,15 +9,19 @@
   background-size: cover;
 }
 
-* {
-  box-sizing: border-box;
+.symbolBtn {
+  font-family: 'DQFont';
 }
 
-body {
+/* * {
+  box-sizing: border-box;
+} */
+
+/* body {
   font-family: sans-serif;
   margin: 20px;
   padding: 0;
-}
+} */
 
 /* .img{
     max-width: 100%;
@@ -25,7 +29,9 @@ body {
   } */
 .square {
   background-color: transparent;
-  border: 1px solid #999;
+  border: 3px solid;
+  border-image: linear-gradient(to bottom, gold, darkgoldenrod);
+  border-image-slice: 1;
   float: left;
   font-size: 100px;
   font-weight: bold;
@@ -38,11 +44,11 @@ body {
   width: 150px;
 }
 
-.board-row:after {
+/* .board-row:after {
   clear: both;
   content: "";
   display: table;
-}
+} */
 .board-row {
   display: flex;
   justify-content: center;
@@ -53,12 +59,88 @@ body {
   margin-bottom: 10px;
   font-size: 40px;
   font-family: 'DQFont';
-}
-.game {
-  display: flex;
-  flex-direction: row;
+  color: linear-gradient(to bottom, gold, darkgoldenrod);
 }
 
-.game-info {
-  margin-left: 20px;
+/* Everything below here was from ChatGPT for stupid stuff I thought of but definitely couldn't do on my own */
+.batBtn {
+  position: relative;
+  display: inline-block;
+  padding: 20px 40px;
+  font-family: "DQFont";
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #0099cc;
+  border: 2px solid #006699;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 1s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.batBtn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background-image: url('/src/images/DQVIII_-_Dracky.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+  transition: left 4s ease;
+}
+
+.batBtn:hover {
+  background-color: #006699;
+}
+
+.batBtn:hover:before {
+  left: 120%;
+}
+
+.slimeBtn {
+  position: relative;
+  display: inline-block;
+  padding: 20px 40px;
+  font-family: "DQFont";
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #0099cc;
+  border: 2px solid #006699;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.1s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.slimeBtn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background-image: url('/src/images/DQ-Slime.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+  transition: left 4s ease;
+}
+
+.slimeBtn:hover {
+  background-color: #006699;
+}
+
+.slimeBtn:hover:before {
+  left: 120%;
 }

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Squares from './Squares'
 
 const Board = () => {
-    const [player, setPlayer] = useState('');
-    const [reset, setReset] = useState(false);
+    const [player, setPlayer] = useState(''); // useState to determine which player you will use. Defaulted to an empty string
+    // const [reset, setReset] = useState(false);
     const [isX, setIsX] = useState(true);
     const [squares, setSquares] = useState(Array(9).fill(null)); // this use state sets an array of 9 and is all filled with type "null" which will later be filled with the 2 choices BAT or SLIME
 
@@ -81,10 +81,10 @@ const Board = () => {
             <div className="col">
                 {player ? <div className='status text-center'>{status}</div> :
                     <div className="text-center">
-                    <button className="symbol-btn me-5" onClick={() => handlePlayer("BAT")}>
+                    <button className="batBtn me-5" onClick={() => handlePlayer("BAT")}>
                       Play AS BAT
                     </button>
-                    <button className="symbol-btn ms-5" onClick={() => handlePlayer("SLIME")}>
+                    <button className="slimeBtn ms-5" onClick={() => handlePlayer("SLIME")}>
                       Play AS SLIME
                     </button>
                   </div>
@@ -114,7 +114,7 @@ const Board = () => {
 
         <div className="row">
           <div className="col my-5 d-flex justify-content-center">
-            {winner || tie() ? <button className="my-5" onClick={handleReset}>RESET?</button> : null} 
+            {winner || tie() ? <button className="symbolBtn my-5" onClick={handleReset}>RESET?</button> : null} 
           </div>
         </div>
     </div>
