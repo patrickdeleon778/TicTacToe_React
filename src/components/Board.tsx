@@ -3,8 +3,9 @@ import Squares from './Squares'
 
 const Board = () => {
     const [player, setPlayer] = useState('');
+    const [reset, setReset] = useState(false);
     const [isX, setIsX] = useState(true);
-    const [squares, setSquares] = useState(Array(9).fill(null));
+    const [squares, setSquares] = useState(Array(9).fill(null)); // this use state sets an array of 9 and is all filled with type "null" which will later be filled with the 2 choices BAT or SLIME
 
     const handleClick = (i: number) => { // added :number because I kept getting an error most likely due to typescript.
         if (!player || squares[i] || determineWinner(squares)) {
@@ -27,6 +28,13 @@ const Board = () => {
 
     const handlePlayer = (character: string) => {
         setPlayer(character);
+        setIsX(character === "BAT");
+        // setSquares(Array(9).fill(null)); // resets the board back to empty
+    }
+
+    const handleReset = () => {
+      setSquares(Array(9).fill(null)); // resets the board back to empty
+      setPlayer(''); // resets the state so when you reset you can choose your player
     }
 
     const determineWinner = (squares: Array<number>) => { // Same thing like last time because of it being typescript again lol
@@ -102,6 +110,12 @@ const Board = () => {
                     <Squares position={squares[8]} onSquare={() => handleClick(8)}/>
                 </div>
             </div>
+        </div>
+
+        <div className="row">
+          <div className="col my-5 d-flex justify-content-center">
+            {winner || tie() ? <button className="my-5" onClick={handleReset}>RESET?</button> : null} 
+          </div>
         </div>
     </div>
   )
