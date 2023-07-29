@@ -2,24 +2,31 @@ import React, { useState } from 'react'
 import Squares from './Squares'
 
 const Board = () => {
+    const [player, setPlayer] = useState('');
     const [isX, setIsX] = useState(true);
     const [squares, setSquares] = useState(Array(9).fill(null));
 
     const handleClick = (i: number) => { // added :number because I kept getting an error most likely due to typescript.
-        if (squares[i] || determineWinner(squares)) {
+        if (!player || squares[i] || determineWinner(squares)) {
             return;
           }
 
         const nextSquares = squares.slice();
 
-        if(isX){
-            nextSquares[i] = "BAT";
-        }
-        else{
-            nextSquares[i] = "SLIME";
-        }
+        // if(isX){
+        //     nextSquares[i] = "BAT";
+        // }
+        // else{
+        //     nextSquares[i] = "SLIME";
+        // }
+
+        nextSquares[i] = isX ? "BAT" : "SLIME";
         setSquares(nextSquares);
         setIsX(!isX);
+    }
+
+    const handlePlayer = (character: string) => {
+        setPlayer(character);
     }
 
     const determineWinner = (squares: Array<number>) => { // Same thing like last time because of it being typescript again lol
@@ -57,18 +64,27 @@ const Board = () => {
         status = 'IT IS A FAT TIE';
     }
     else {
-        status = 'Next player: ' + (isX ? 'BAT' : 'SLIME');
+        status = `Next player: ${isX ? "BAT" : "SLIME"}`;
     }
 
   return (
     <div className='container'>
         <div className="row mt-5">
             <div className="col">
-                <div className='status text-center'>{status}</div>
+                {player ? <div className='status text-center'>{status}</div> :
+                    <div className="text-center">
+                    <button className="symbol-btn me-5" onClick={() => handlePlayer("BAT")}>
+                      Play AS BAT
+                    </button>
+                    <button className="symbol-btn ms-5" onClick={() => handlePlayer("SLIME")}>
+                      Play AS SLIME
+                    </button>
+                  </div>
+                }
             </div>
         </div>
 
-        <div className="row mt-5">
+        <div className="row my-5">
             <div className="col">
                 <div className="board-row">
                     <Squares position={squares[0]} onSquare={() => handleClick(0)}/>
