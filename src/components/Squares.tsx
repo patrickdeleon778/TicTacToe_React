@@ -3,9 +3,10 @@ import React, { useState } from "react";
 interface Props {
   position: string | null;
   onSquare: () => void;
+  className?: string;
 }
 
-const Squares = ({position, onSquare}:Props) => {
+const Squares = ({position, onSquare, className}:Props) => {
     const getImage = () => {
         if (position === "BAT") {
           return <img src='/src/images/DQVIII_-_Dracky.png' alt="X" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
@@ -18,7 +19,7 @@ const Squares = ({position, onSquare}:Props) => {
 
   return (
     <div>
-      <button className="square" onClick={onSquare}>{getImage()}</button>
+      <button className={`square ${className}`} onClick={onSquare}>{getImage()}</button>
     </div>
   );
 };

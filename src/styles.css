@@ -56,10 +56,29 @@
 }
 
 .status {
-  margin-bottom: 10px;
-  font-size: 40px;
-  font-family: 'DQFont';
-  color: linear-gradient(to bottom, gold, darkgoldenrod);
+  font-size: 36px;
+  font-weight: bold; 
+  font-family: "DQFont";
+  background: linear-gradient(to bottom, gold, darkgoldenrod);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.playBtn {
+  margin-top: 400px;
+  font-size: 24px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0094ff; /* Dragon Quest blue color */
+  color: #ffffff; /* White text color */
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+.playBtn:hover {
+  background-color: #0077cc; /* Darker blue color on hover */
 }
 
 /* Everything below here was from ChatGPT for stupid stuff I thought of but definitely couldn't do on my own */
