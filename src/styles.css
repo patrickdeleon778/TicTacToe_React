@@ -10,7 +10,21 @@
 }
 
 .symbolBtn {
-  font-family: 'DQFont';
+  position: relative;
+  display: inline-block;
+  padding: 20px 40px;
+  font-family: "DQFont";
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: gold;
+  border: 2px solid darkgoldenrod;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 1s ease;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 /* * {
@@ -66,20 +80,23 @@
 }
 
 .playBtn {
-  margin-top: 400px;
+  position: relative;
+  display: inline-block;
+  padding: 20px 40px;
+  font-family: "DQFont";
   font-size: 24px;
-  padding: 10px 20px;
-  border: none;
-  background-color: #0094ff; /* Dragon Quest blue color */
-  color: #ffffff; /* White text color */
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: red;
+  border: 2px solid darkred;
   border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 1s ease;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
+  overflow: hidden;
 }
-.playBtn:hover {
-  background-color: #0077cc; /* Darker blue color on hover */
-}
+
 
 /* Everything below here was from ChatGPT for stupid stuff I thought of but definitely couldn't do on my own */
 .batBtn {
@@ -91,20 +108,22 @@
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;
-  background-color: #0099cc;
-  border: 2px solid #006699;
+  background-color: gold;
+  border: 2px solid goldenrod;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 1s ease;
   cursor: pointer;
   overflow: hidden;
+  width: 275px;
+  height: 140px;
 }
 
 .batBtn:before {
   content: '';
   position: absolute;
   top: 0;
-  left: -120%;
+  left: 0;
   width: 100%;
   height: 100%;
   background-image: url('/src/images/DQVIII_-_Dracky.png');
@@ -112,15 +131,12 @@
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.6;
-  transition: left 4s ease;
+  /* transition: left 4s ease; */
+  animation: swayAnimation 2s infinite alternate;
 }
 
 .batBtn:hover {
   background-color: #006699;
-}
-
-.batBtn:hover:before {
-  left: 120%;
 }
 
 .slimeBtn {
@@ -132,20 +148,22 @@
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;
-  background-color: #0099cc;
-  border: 2px solid #006699;
+  background-color: gold;
+  border: 2px solid goldenrod;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.1s ease;
+  transition: background-color 1s ease;
   cursor: pointer;
   overflow: hidden;
+  width: 275px;
+  height: 140px;
 }
 
 .slimeBtn:before {
   content: '';
   position: absolute;
   top: 0;
-  left: -120%;
+  left: 0;
   width: 100%;
   height: 100%;
   background-image: url('/src/images/DQ-Slime.png');
@@ -153,13 +171,20 @@
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.6;
-  transition: left 4s ease;
+  /* transition: left 4s ease; */
+  animation: swayAnimation 2s infinite alternate;
 }
 
 .slimeBtn:hover {
   background-color: #006699;
 }
 
-.slimeBtn:hover:before {
-  left: 120%;
+
+@keyframes swayAnimation {
+  0% {
+    transform: translateX(-70%); /* Starting position */
+  }
+  100% {
+    transform: translateX(70%); /* Ending position (adjust as needed) */
+  }
 }
