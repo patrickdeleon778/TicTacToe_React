@@ -80,6 +80,7 @@
 }
 
 .playBtn {
+  margin-top: 200px;
   position: relative;
   display: inline-block;
   padding: 20px 40px;
@@ -97,6 +98,11 @@
   overflow: hidden;
 }
 
+.score {
+  font-size: 50px;
+  font-family: "DQFont";
+  color: gold
+}
 
 /* Everything below here was from ChatGPT for stupid stuff I thought of but definitely couldn't do on my own */
 .batBtn {

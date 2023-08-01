@@ -4,7 +4,7 @@ const WinningSound = () => {
   return (
     <div>
       <audio autoPlay>
-        <source src="/src/audio/DQII Crit sound.mp3" type="audio/mpeg" />
+        <source src="/src/audio/DQII Crit sound-[AudioTrimmer.com].mp3" type="audio/mpeg" />
       </audio>
     </div>
   )

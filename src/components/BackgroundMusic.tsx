@@ -4,7 +4,7 @@ const BackgroundMusic = () => {
   return (
     <div>
       <audio autoPlay loop>
-        <source src="/src/audio/Dragon Quest XI [Symphonic] - Overture (XI) (No Intro).mp3" type="audio/mpeg" />
+        <source src="/src/audio/Dragon Quest III GBC Battle Theme.mp3" type="audio/mpeg" />
       </audio>
     </div>
   )
