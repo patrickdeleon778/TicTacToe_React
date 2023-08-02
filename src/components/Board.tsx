@@ -26,6 +26,7 @@ const Board = () => {
     const [squares, setSquares] = useState(Array(9).fill(null)); // this use state sets an array of 9 and is all filled with type "null" which will later be filled with the 2 choices BAT or SLIME
     const [count, setCount] = useState(0);
     const [enemyCount, setEnemyCount] = useState(0);
+    
 
     const handlePlay = () => { 
         setPlay(true); // sets to true to start the game
@@ -82,17 +83,6 @@ const Board = () => {
                 const randomIndex = Math.floor(Math.random() * availableMoves.length);
                 const computerMove = availableMoves[randomIndex];
                 const nextSquares = squares.slice();
-
-                // if(player === 'BAT'){
-                //     nextSquares[computerMove] = "SLIME";
-                //     setSquares(nextSquares);
-                //     setIsX(true);
-                // }
-                // else if(player === 'SLIME'){
-                //     nextSquares[computerMove] = "BAT";
-                //     setSquares(nextSquares);
-                //     setIsX(true);
-                // }
                 
                 nextSquares[computerMove] = player === 'BAT' ? 'SLIME' : 'BAT';
                 setSquares(nextSquares);
@@ -106,7 +96,7 @@ const Board = () => {
             const computerMoveTimeout = setTimeout(makeComputerMove, 1000); // Delay of 1 second (adjust as needed)
             return () => clearTimeout(computerMoveTimeout);
         }
-    }, [play, isX, squares]);
+    }, [isX, squares]);
 
     useEffect(() => {
         const winnerScore = determineWinner(squares);
