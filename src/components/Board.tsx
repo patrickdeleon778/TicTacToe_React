@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Squares from './Squares'
 import SelectMusic from './SelectMusic';
 import BackgroundMusic from './BackgroundMusic';
@@ -53,8 +53,74 @@ const Board = () => {
                 handleScore(); // increment the player's score if the player wins
                 console.log(count);
             }
+        } else {
+            // Simulate computer's move
+            if (!isX) {
+                let computerMove = getRandomMove(nextSquares);
+                while (nextSquares[computerMove] !== null) {
+                    // Keep generating a random move until an available square is found
+                    computerMove = getRandomMove(nextSquares);
+                }
+                
+                    nextSquares[computerMove] = player === 'BAT' ? 'SLIME' : player === 'SLIME' ? 'BAT' : null;
+                    setSquares(nextSquares);
+                    setIsX(true);
+               
+            }
         }
+        
     }
+
+    const makeComputerMove = () => {
+        if (!isX && !determineWinner(squares) && !tie()) {
+            const availableMoves = squares.reduce((accumulator, current, index) => {
+                if (current === null) accumulator.push(index);
+                return accumulator;
+            }, []);
+
+            if (availableMoves.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableMoves.length);
+                const computerMove = availableMoves[randomIndex];
+                const nextSquares = squares.slice();
+
+                // if(player === 'BAT'){
+                //     nextSquares[computerMove] = "SLIME";
+                //     setSquares(nextSquares);
+                //     setIsX(true);
+                // }
+                // else if(player === 'SLIME'){
+                //     nextSquares[computerMove] = "BAT";
+                //     setSquares(nextSquares);
+                //     setIsX(true);
+                // }
+                
+                nextSquares[computerMove] = player === 'BAT' ? 'SLIME' : 'BAT';
+                setSquares(nextSquares);
+                setIsX(true); 
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (play && !isX) {
+            const computerMoveTimeout = setTimeout(makeComputerMove, 1000); // Delay of 1 second (adjust as needed)
+            return () => clearTimeout(computerMoveTimeout);
+        }
+    }, [play, isX, squares]);
+
+    useEffect(() => {
+        const winnerScore = determineWinner(squares);
+        if (winnerScore) {
+            if (winnerScore.toString() !== player) {
+                handleEnemyScore();
+            }
+        }
+    }, [squares, player]);
+
+
+    const getRandomMove = (squares: Array<string | null>) => {
+        return Math.floor(Math.random() * 9);
+    };
 
     const handlePlayer = (character: string) => {
         setPlayer(character); // sets the character from the squares component
@@ -96,6 +162,8 @@ const Board = () => {
         }
         return null;
     }
+
+    
 
     const tie = () => { // added a tie function for when the board is filled up 
       return squares.every(square => square !== null); // .every checks each square to see if it is not equal to null. meaning if the squares are already used.
