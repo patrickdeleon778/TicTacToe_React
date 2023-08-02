@@ -26,6 +26,7 @@ const Board = () => {
     const [squares, setSquares] = useState(Array(9).fill(null)); // this use state sets an array of 9 and is all filled with type "null" which will later be filled with the 2 choices BAT or SLIME
     const [count, setCount] = useState(0);
     const [enemyCount, setEnemyCount] = useState(0);
+    const [playerSymbol, setPlayerSymbol] = useState('');
     
 
     const handlePlay = () => { 
@@ -49,31 +50,16 @@ const Board = () => {
         if (winnerScore) {
             if (winnerScore.toString() !== player) { // Check if the winner is not the player
                 handleEnemyScore(); // increment the enemy's score if the player loses
-                console.log(enemyCount);
+                // console.log(enemyCount);
             } else {
                 handleScore(); // increment the player's score if the player wins
-                console.log(count);
-            }
-        } else {
-            // Simulate computer's move
-            if (!isX) {
-                let computerMove = getRandomMove(nextSquares);
-                while (nextSquares[computerMove] !== null) {
-                    // Keep generating a random move until an available square is found
-                    computerMove = getRandomMove(nextSquares);
-                }
-                
-                    nextSquares[computerMove] = player === 'BAT' ? 'SLIME' : player === 'SLIME' ? 'BAT' : null;
-                    setSquares(nextSquares);
-                    setIsX(true);
-               
+                // console.log(count);
             }
         }
-        
     }
 
     const makeComputerMove = () => {
-        if (!isX && !determineWinner(squares) && !tie()) {
+        if (!determineWinner(squares) && !tie()) {
             const availableMoves = squares.reduce((accumulator, current, index) => {
                 if (current === null) accumulator.push(index);
                 return accumulator;
@@ -84,7 +70,7 @@ const Board = () => {
                 const computerMove = availableMoves[randomIndex];
                 const nextSquares = squares.slice();
                 
-                nextSquares[computerMove] = player === 'BAT' ? 'SLIME' : 'BAT';
+                nextSquares[computerMove] = playerSymbol;
                 setSquares(nextSquares);
                 setIsX(true); 
             }
@@ -92,11 +78,12 @@ const Board = () => {
     };
 
     useEffect(() => {
-        if (play && !isX) {
+        if (play && !selectBgm && !isX) {
             const computerMoveTimeout = setTimeout(makeComputerMove, 1000); // Delay of 1 second (adjust as needed)
             return () => clearTimeout(computerMoveTimeout);
         }
-    }, [isX, squares]);
+    }, [squares]);
+    
 
     useEffect(() => {
         const winnerScore = determineWinner(squares);
@@ -107,13 +94,13 @@ const Board = () => {
         }
     }, [squares, player]);
 
+    
 
-    const getRandomMove = (squares: Array<string | null>) => {
-        return Math.floor(Math.random() * 9);
-    };
+
 
     const handlePlayer = (character: string) => {
         setPlayer(character); // sets the character from the squares component
+        setPlayerSymbol(character === "BAT" ? "SLIME" : "BAT"); // Determine player's symbol based on their choice
         setIsX(character === "BAT"); // sets character as BAT. if it's false it'll set it as SLIME
         setSelectBgm(false); // removes the select music for the bgm music to play
         setBgm(true); // adds the bgm back when reset
