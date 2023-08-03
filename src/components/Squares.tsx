@@ -12,14 +12,14 @@ interface Props {
 const Squares = ({position, onSquare, className, winningSound, player}:Props) => {
     const getImage = () => {
         if (position === "BAT") { // if the current position is BAT then display the BAT image in the square
-          return <img src='/src/images/DQVIII_-_Dracky.png' alt="X" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
+          return <img src='/src/images/DQVIII_-_Dracky.png' className="wiggle" alt="X" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
         } else if (position === "SLIME") { // if the current position is SLIME then display the SLIME image in the square
-          return <img src='/src/images/DQ-Slime.png' alt="O" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
+          return <img src='/src/images/DQ-Slime.png' className="wiggle" alt="O" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
         } else {
           return null;
         }
       };
-    const playHop = () => {
+    const playHop = () => { // function for the sound effect when you press a square
         if(player && !winningSound){
             const sound = new Audio(hop);
             sound.play();

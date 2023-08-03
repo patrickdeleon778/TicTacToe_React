@@ -103,6 +103,11 @@
   font-family: "DQFont";
   color: gold
 }
+.indicator {
+  font-size: 50px;
+  font-family: "DQFont";
+  color: black
+}
 
 /* Everything below here was from ChatGPT for stupid stuff I thought of but definitely couldn't do on my own */
 .batBtn {

@@ -44,7 +44,7 @@ const Board = () => {
         setSelectBgm(false); // removes the select music for the bgm music to play
         setBgm(true); // adds the bgm back when reset
         // setSquares(Array(9).fill(null)); // resets the board back to empty
-        setCurrentPlayer(character);
+        setCurrentPlayer(character); // set the same as setPlayer() so it'll be switched around
     }
     
     const handleClick = (i: number) => { // added :number because I kept getting an error most likely due to typescript.
@@ -70,48 +70,48 @@ const Board = () => {
                     // console.log(count);
                 }
             }
-            setCurrentPlayer(currentPlayer === 'BAT' ? 'SLIME' : 'BAT');
+            setCurrentPlayer(currentPlayer === 'BAT' ? 'SLIME' : 'BAT'); // switches currentPlayer to the opposite of the player
         }
 
     }
 
     const makeComputerMove = () => {
-        if (!determineWinner(squares) && !tie() && currentPlayer !== player) {
+        if (!determineWinner(squares) && !tie() && currentPlayer !== player) { // if there is no winner and no tie and the current player doesn't equal the player it'll run the code below.
             const availableMoves = squares.reduce((accumulator, current, index) => {
-                if (current === null) accumulator.push(index);
+                if (current === null) accumulator.push(index); //checks to see if a square is empty. if it is it pushes it to the accumulator
                 return accumulator;
             }, []);
 
-            if (availableMoves.length > 0) {
-                const randomIndex = Math.floor(Math.random() * availableMoves.length);
-                const computerMove = availableMoves[randomIndex];
-                const nextSquares = squares.slice();
+            if (availableMoves.length > 0) { // if there is an available move
+                const randomIndex = Math.floor(Math.random() * availableMoves.length); // it gets a random number from the length of what moves are left
+                const computerMove = availableMoves[randomIndex]; // variable that saves the computers move on the board where the random number generated
+                const nextSquares = squares.slice(); // gets a copy of the current board
                 
-                nextSquares[computerMove] = computerSymbol;
-                setSquares(nextSquares);
+                nextSquares[computerMove] = computerSymbol; // adds the computers move onto the board using the computerSymbol save state which shows what the opposite symbol is to the player
+                setSquares(nextSquares); // sets the state of the square in setSquares
 
-                setCurrentPlayer(player);
-                setIsX(!isX); 
+                setCurrentPlayer(player); // sets this currentPlayer state back to equal the player so it repeats the cycle.
+                setIsX(!isX); // changes back to the players turn
             }
         }
     };
 
     useEffect(() => {
-        if (play && !selectBgm && currentPlayer !== player) {
-            const computerMoveTimeout = setTimeout(makeComputerMove, 1000); // Delay of 1 second (adjust as needed)
-            return () => clearTimeout(computerMoveTimeout);
+        if (play && !selectBgm && currentPlayer !== player) { // if the game is active and the select screen BGM is off and the current player doesn't equal player then run the code below
+            const computerMoveTimeout = setTimeout(makeComputerMove, 1000); // Delays for 1 second  
+            return () => clearTimeout(computerMoveTimeout); // clears the setTimeout so it doesn't continually plays
         }
-    }, [squares]);
+    }, [squares]); // dependancy array to make the useEffect run everytime the squares board is changed.
     
 
     useEffect(() => {
-        const winnerScore = determineWinner(squares);
-        if (winnerScore) {
-            if (winnerScore.toString() !== player) {
-                handleEnemyScore();
+        const winnerScore = determineWinner(squares); // grabs the winner and stores it in the winner variable
+        if (winnerScore) { // if the winner is true
+            if (winnerScore.toString() !== player) { // if the score doesn't equal the player that means you lose
+                handleEnemyScore(); // gives the enemy a point
             }
         }
-    }, [squares, player]);
+    }, [squares]); // runs everytime the square board changes
 
     
 
@@ -226,6 +226,15 @@ const Board = () => {
                     <div className="row">
                         {player === 'BAT' ? (
                             <>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <p className='indicator text-center floater'>YOU</p>
+                                    </div>
+                                    <div className="col-md-12 d-flex justify-content-center mb-5">
+                                        <img src="/src/images/arrow pointing down.png"  className='floater' alt="" style={{width: "100px", height: "100px"}}/>
+                                    </div>
+                                </div>
+                                
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <img src="/src/images/DQVIII_-_Dracky.png" alt="" style={{width: "300px", height: "200px"}}/>
                                 </div>
@@ -234,9 +243,18 @@ const Board = () => {
                                 </div>
                             </>
                         ) : player === 'SLIME' ?
-                            <>
+                            <>  
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <p className='indicator text-center floater'>YOU</p>
+                                    </div>
+                                    <div className="col-md-12 d-flex justify-content-center mb-5">
+                                        <img src="/src/images/arrow pointing down.png" className='floater' alt="" style={{width: "100px", height: "100px"}}/>
+                                    </div>
+                                </div>
+
                                 <div className="col d-flex justify-content-center align-items-center">
-                                    <img src="/src/images/DQ-Slime.png" alt="" style={{width: "300px", height: "300px"}}/>
+                                    <img src="/src/images/DQ-Slime.png" alt="" style={{width: "200px", height: "200px"}}/>
                                 </div>
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <p className='score'>{count}</p>
@@ -265,8 +283,17 @@ const Board = () => {
                     <div className="row">
                         {player === 'BAT' ? (
                             <>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <p className='indicator text-center floater'>ENEMY</p>
+                                    </div>
+                                    <div className="col-md-12 d-flex justify-content-center mb-5">
+                                        <img src="/src/images/arrow pointing down.png" className='floater' alt="Arrow down" style={{width: "100px", height: "100px"}}/>
+                                    </div>
+                                </div>
+
                                 <div className="col d-flex justify-content-center align-items-center">
-                                    <img src="/src/images/DQ-Slime.png" alt="" style={{width: "300px", height: "300px"}}/>
+                                    <img src="/src/images/DQ-Slime.png" alt="Slime" style={{width: "200px", height: "200px"}}/>
                                 </div>
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <p className='score'>{enemyCount}</p>
@@ -274,6 +301,15 @@ const Board = () => {
                             </>
                         ) : player === 'SLIME' ?
                             <>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <p className='indicator text-center floater'>ENEMY</p>
+                                    </div>
+                                    <div className="col-md-12 d-flex justify-content-center mb-5">
+                                        <img src="/src/images/arrow pointing down.png" className='floater' alt="Arrow down" style={{width: "100px", height: "100px"}}/>
+                                    </div>
+                                </div>
+
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <img src="/src/images/DQVIII_-_Dracky.png" alt="" style={{width: "300px", height: "200px"}}/>
                                 </div>
