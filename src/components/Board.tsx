@@ -26,7 +26,8 @@ const Board = () => {
     const [squares, setSquares] = useState(Array(9).fill(null)); // this use state sets an array of 9 and is all filled with type "null" which will later be filled with the 2 choices BAT or SLIME
     const [count, setCount] = useState(0);
     const [enemyCount, setEnemyCount] = useState(0);
-    const [playerSymbol, setPlayerSymbol] = useState('');
+    const [computerSymbol, setComputerSymbol] = useState('');
+    const [currentPlayer, setCurrentPlayer] = useState('');
     
 
     const handlePlay = () => { 
@@ -34,32 +35,48 @@ const Board = () => {
         setSelectBgm(true); // starts playing the select music 
         setBgm(false); // removes the bgm in case it was still active or not.
     }
+
+    const handlePlayer = (character: string) => {
+        setPlayer(character); // sets the character from the squares component
+        setComputerSymbol(character === "BAT" ? "SLIME" : "BAT"); // Determine player's symbol based on their choice
+        console.log("Selected character:", character);
+        setIsX(character === "BAT"); // sets character as BAT. if it's false it'll set it as SLIME
+        setSelectBgm(false); // removes the select music for the bgm music to play
+        setBgm(true); // adds the bgm back when reset
+        // setSquares(Array(9).fill(null)); // resets the board back to empty
+        setCurrentPlayer(character);
+    }
     
     const handleClick = (i: number) => { // added :number because I kept getting an error most likely due to typescript.
         if (!player || squares[i] || determineWinner(squares)) { // this fixes some small bugs like double clicking the same square, etc
             return;
           }
 
-        const nextSquares = squares.slice(); // creates a copy of the array 
-        nextSquares[i] = isX ? "BAT" : "SLIME"; // this checks to see if the index of the players symbol is bat. If it is the bat symbol will be placed. If not the slime symbol will be placed on the square
+        if(currentPlayer === player){
 
-        setSquares(nextSquares); // updates the square index depending on where it was clicked.
-        setIsX(!isX); // sets to false for the next player
-        
-        const winnerScore = determineWinner(nextSquares); // Check for the winner after updating squares
-        if (winnerScore) {
-            if (winnerScore.toString() !== player) { // Check if the winner is not the player
-                handleEnemyScore(); // increment the enemy's score if the player loses
-                // console.log(enemyCount);
-            } else {
-                handleScore(); // increment the player's score if the player wins
-                // console.log(count);
+            const nextSquares = squares.slice(); // creates a copy of the array 
+            nextSquares[i] = isX ? "BAT" : "SLIME"; // this checks to see if the index of the players symbol is bat. If it is the bat symbol will be placed. If not the slime symbol will be placed on the square
+
+            setSquares(nextSquares); // updates the square index depending on where it was clicked.
+            setIsX(!isX); // sets to false for the next player
+            
+            const winnerScore = determineWinner(nextSquares); // Check for the winner after updating squares
+            if (winnerScore) {
+                if (winnerScore.toString() !== player) { // Check if the winner is not the player
+                    handleEnemyScore(); // increment the enemy's score if the player loses
+                    // console.log(enemyCount);
+                } else {
+                    handleScore(); // increment the player's score if the player wins
+                    // console.log(count);
+                }
             }
+            setCurrentPlayer(currentPlayer === 'BAT' ? 'SLIME' : 'BAT');
         }
+
     }
 
     const makeComputerMove = () => {
-        if (!determineWinner(squares) && !tie()) {
+        if (!determineWinner(squares) && !tie() && currentPlayer !== player) {
             const availableMoves = squares.reduce((accumulator, current, index) => {
                 if (current === null) accumulator.push(index);
                 return accumulator;
@@ -70,15 +87,17 @@ const Board = () => {
                 const computerMove = availableMoves[randomIndex];
                 const nextSquares = squares.slice();
                 
-                nextSquares[computerMove] = playerSymbol;
+                nextSquares[computerMove] = computerSymbol;
                 setSquares(nextSquares);
-                setIsX(true); 
+
+                setCurrentPlayer(player);
+                setIsX(!isX); 
             }
         }
     };
 
     useEffect(() => {
-        if (play && !selectBgm && !isX) {
+        if (play && !selectBgm && currentPlayer !== player) {
             const computerMoveTimeout = setTimeout(makeComputerMove, 1000); // Delay of 1 second (adjust as needed)
             return () => clearTimeout(computerMoveTimeout);
         }
@@ -98,14 +117,16 @@ const Board = () => {
 
 
 
-    const handlePlayer = (character: string) => {
-        setPlayer(character); // sets the character from the squares component
-        setPlayerSymbol(character === "BAT" ? "SLIME" : "BAT"); // Determine player's symbol based on their choice
-        setIsX(character === "BAT"); // sets character as BAT. if it's false it'll set it as SLIME
-        setSelectBgm(false); // removes the select music for the bgm music to play
-        setBgm(true); // adds the bgm back when reset
-        // setSquares(Array(9).fill(null)); // resets the board back to empty
-    }
+    // const handlePlayer = (character: string) => {
+    //     setPlayer(character); // sets the character from the squares component
+    //     setComputerSymbol(character === "BAT" ? "SLIME" : "BAT"); // Determine player's symbol based on their choice
+    //     console.log("Selected character:", character);
+    //     setIsX(character === "BAT"); // sets character as BAT. if it's false it'll set it as SLIME
+    //     setSelectBgm(false); // removes the select music for the bgm music to play
+    //     setBgm(true); // adds the bgm back when reset
+    //     setCurrentPlayer(character);
+    //     // setSquares(Array(9).fill(null)); // resets the board back to empty
+    // }
 
     const handleReset = () => {
       setSquares(Array(9).fill(null)); // resets the board back to empty
