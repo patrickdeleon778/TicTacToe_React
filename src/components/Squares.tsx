@@ -1,5 +1,7 @@
 // import React, { useState } from "react";
 import hop from "../audio/hop dq.mp3"
+import DrackyImg from "../images/DQVIII_-_Dracky.png";
+import SlimeImg from '../images/DQ-Slime.png';
 
 interface Props {
   position: string | null;
@@ -12,9 +14,9 @@ interface Props {
 const Squares = ({position, onSquare, className, winningSound, player}:Props) => {
     const getImage = () => {
         if (position === "BAT") { // if the current position is BAT then display the BAT image in the square
-          return <img src='/src/images/DQVIII_-_Dracky.png' className="wiggle" alt="X" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
+          return <img src={DrackyImg} className="wiggle" alt="X" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
         } else if (position === "SLIME") { // if the current position is SLIME then display the SLIME image in the square
-          return <img src='/src/images/DQ-Slime.png' className="wiggle" alt="O" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
+          return <img src={SlimeImg} className="wiggle" alt="O" style={{maxWidth: "100%", maxHeight: "100%"}}/>;
         } else {
           return null;
         }

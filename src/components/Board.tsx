@@ -4,6 +4,12 @@ import SelectMusic from './SelectMusic';
 import BackgroundMusic from './BackgroundMusic';
 import WinningSound from './WinningSound';
 
+import Logo from '../images/Dragon_Quest_logo.png'
+import ArrowDown from '../images/arrow pointing down.png';
+import DrackyImg from "../images/DQVIII_-_Dracky.png";
+import SlimeImg from '../images/DQ-Slime.png';
+
+
 const row = [
     [0, 1, 2], // Top row from left to right
     [3, 4, 5], // Middle row from left to right
@@ -196,7 +202,7 @@ const Board = () => {
         <>
             <div className="row mt-5">
                 <div className="col d-flex justify-content-center align-items-center">
-                    <img src='/src/images/Dragon_Quest_logo.png'/>
+                    <img src={Logo}/>
                 </div>
             </div>
             <div className="row">
@@ -231,12 +237,12 @@ const Board = () => {
                                         <p className='indicator text-center floater'>YOU</p>
                                     </div>
                                     <div className="col-md-12 d-flex justify-content-center mb-5">
-                                        <img src="/src/images/arrow pointing down.png"  className='floater' alt="" style={{width: "100px", height: "100px"}}/>
+                                        <img src={ArrowDown}  className='floater' alt="" style={{width: "100px", height: "100px"}}/>
                                     </div>
                                 </div>
                                 
                                 <div className="col d-flex justify-content-center align-items-center">
-                                    <img src="/src/images/DQVIII_-_Dracky.png" alt="" style={{width: "300px", height: "200px"}}/>
+                                    <img src={DrackyImg} alt="" style={{width: "300px", height: "200px"}}/>
                                 </div>
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <p className='score'>{count}</p>
@@ -249,12 +255,12 @@ const Board = () => {
                                         <p className='indicator text-center floater'>YOU</p>
                                     </div>
                                     <div className="col-md-12 d-flex justify-content-center mb-5">
-                                        <img src="/src/images/arrow pointing down.png" className='floater' alt="" style={{width: "100px", height: "100px"}}/>
+                                        <img src={ArrowDown} className='floater' alt="" style={{width: "100px", height: "100px"}}/>
                                     </div>
                                 </div>
 
                                 <div className="col d-flex justify-content-center align-items-center">
-                                    <img src="/src/images/DQ-Slime.png" alt="" style={{width: "200px", height: "200px"}}/>
+                                    <img src={SlimeImg} alt="" style={{width: "200px", height: "200px"}}/>
                                 </div>
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <p className='score'>{count}</p>
@@ -288,12 +294,12 @@ const Board = () => {
                                         <p className='indicator text-center floater'>ENEMY</p>
                                     </div>
                                     <div className="col-md-12 d-flex justify-content-center mb-5">
-                                        <img src="/src/images/arrow pointing down.png" className='floater' alt="Arrow down" style={{width: "100px", height: "100px"}}/>
+                                        <img src={ArrowDown} className='floater' alt="Arrow down" style={{width: "100px", height: "100px"}}/>
                                     </div>
                                 </div>
 
                                 <div className="col d-flex justify-content-center align-items-center">
-                                    <img src="/src/images/DQ-Slime.png" alt="Slime" style={{width: "200px", height: "200px"}}/>
+                                    <img src={SlimeImg} alt="Slime" style={{width: "200px", height: "200px"}}/>
                                 </div>
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <p className='score'>{enemyCount}</p>
@@ -306,12 +312,12 @@ const Board = () => {
                                         <p className='indicator text-center floater'>ENEMY</p>
                                     </div>
                                     <div className="col-md-12 d-flex justify-content-center mb-5">
-                                        <img src="/src/images/arrow pointing down.png" className='floater' alt="Arrow down" style={{width: "100px", height: "100px"}}/>
+                                        <img src={ArrowDown} className='floater' alt="Arrow down" style={{width: "100px", height: "100px"}}/>
                                     </div>
                                 </div>
 
                                 <div className="col d-flex justify-content-center align-items-center">
-                                    <img src="/src/images/DQVIII_-_Dracky.png" alt="" style={{width: "300px", height: "200px"}}/>
+                                    <img src={DrackyImg} alt="" style={{width: "300px", height: "200px"}}/>
                                 </div>
                                 <div className="col d-flex justify-content-center align-items-center">
                                     <p className='score'>{enemyCount}</p>
